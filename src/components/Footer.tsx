@@ -75,7 +75,7 @@ const Footer = () => {
 
               <p className="flex items-center justify-center md:justify-end gap-2">
                 <Phone className="w-4 h-4" />
-                +56 9 1234 5678
+                +56 9 8630 6425
               </p>
 
               <p className="flex items-center justify-center md:justify-end gap-2">

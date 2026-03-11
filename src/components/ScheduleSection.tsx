@@ -1,23 +1,17 @@
-import { Users, Calendar, Sun } from "lucide-react";
+import { Calendar, Sun } from "lucide-react";
 
 const schedules = [
   {
-    icon: Users,
-    title: "LUNES FEMENINO",
-    location: "Complejo Deportivo Central",
-    address: "Av. Principal 1234, Santiago",
-  },
-  {
     icon: Calendar,
-    title: "MARTES A JUEVES MASCULINO",
-    location: "Complejo Deportivo Central",
-    address: "Av. Principal 1234, Santiago",
+    title: "TODOS LOS SÁBADOS",
+    location: "Estadio San Jorge",
+    address: "Paul Harris 9388, Las Condes, Región Metropolitana",
   },
   {
     icon: Sun,
-    title: "SÁBADOS MIXTO",
-    location: "Cancha Norte",
-    address: "Calle Los Deportes 567, Santiago",
+    title: "¿EN QUÉ HORARIOS?",
+    location: "En Bloques Rotativos",
+    address: "(12:00 - 13:00), (13:30 - 14:30), (15:00 - 16:00), (16:30 - 17:30).",
   },
 ];
 
@@ -29,7 +23,7 @@ const ScheduleSection = () => {
           ¿DÓNDE Y CUÁNDO JUGAMOS?
         </h2>
         
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
           {schedules.map((schedule, index) => (
             <div 
               key={index}

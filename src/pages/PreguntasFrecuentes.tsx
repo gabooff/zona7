@@ -4,9 +4,10 @@ import Footer from "../components/Footer";
 
 type FAQItem = {
   question: string;
-  answer: string;
+  answer?: string;
   link?: string;
   linkLabel?: string;
+  customContent?: React.ReactNode;
 };
 
 const faqData: FAQItem[] = [
@@ -37,8 +38,27 @@ const faqData: FAQItem[] = [
   },
   {
     question: "¿Qué días y a qué hora se juega?",
-    answer:
-      "Los partidos se disputan los días sábado en uno de los siguientes bloques horarios: 12:00 a 13:00, 13:30 a 14:30, 15:00 a 16:00 o 16:30 a 17:30. Cada fecha contempla 4 partidos con 30 minutos de intervalo entre encuentros. Los horarios se asignan de forma aleatoria y rotativa para asegurar una distribución equitativa durante el campeonato.",
+    customContent: (
+      <div className="space-y-4 text-gray-300">
+        <p className="text-[17px] leading-8">
+          Los partidos se disputan los días <strong className="text-white">sábado</strong>, en uno de los
+          siguientes bloques horarios:
+        </p>
+
+        <ul className="list-disc space-y-2 pl-6 text-[17px] leading-8 marker:text-red-500">
+          <li>12:00 a 13:00</li>
+          <li>13:30 a 14:30</li>
+          <li>15:00 a 16:00</li>
+          <li>16:30 a 17:30</li>
+        </ul>
+
+        <p className="text-[17px] leading-8">
+          Cada fecha contempla 4 partidos con 30 minutos de intervalo entre encuentros.
+          Los horarios se asignan de forma aleatoria y rotativa para asegurar una
+          distribución equitativa durante el campeonato.
+        </p>
+      </div>
+    ),
   },
   {
     question: "¿Dónde se juega?",
@@ -49,8 +69,55 @@ const faqData: FAQItem[] = [
   },
   {
     question: "¿Qué me puedo ganar?",
-    answer:
-      "En Zona 7 premiamos el rendimiento durante todo el campeonato. El primer lugar recibe la copa de campeón, medallas para todos los integrantes del equipo, 2 botellas de Pisco Alto del Carmen 1,5L y $200.000 para el asado de celebración. El segundo lugar recibe medallas, 2 botellas de Pisco Alto del Carmen 1,5L, 24 cervezas Patagonia Hoppy Lager y un pack de asado que incluye 2 kg de costillar de cerdo, 2 kg de lomo vetado y 2 kg de chorizo parrillero. El tercer lugar recibe medallas, 2 botellas de Pisco Alto del Carmen 1,5L y 24 cervezas Patagonia Hoppy Lager. Las cervezas podrán ser reemplazadas por otra marca de categoría similar, previa coordinación con la organización.",
+    customContent: (
+      <div className="space-y-8 text-gray-300">
+        <p className="text-[17px] leading-8">
+          En Zona 7 premiamos el rendimiento durante todo el campeonato. Estos son los
+          premios oficiales:
+        </p>
+
+        <div className="space-y-3">
+          <h4 className="text-xl font-bold text-white">🥇 Primer Lugar</h4>
+          <ul className="list-disc space-y-2 pl-6 text-[17px] leading-8 marker:text-red-500">
+            <li>Copa de campeón</li>
+            <li>Medallas para todos los integrantes</li>
+            <li>2 botellas de Pisco Alto del Carmen 1,5L</li>
+            <li>$200.000 para el asado de los campeones</li>
+          </ul>
+          <p className="text-[17px] leading-8">
+            El monto en dinero será entregado al equipo para que lo administren libremente
+            en su celebración.
+          </p>
+        </div>
+
+        <div className="space-y-3">
+          <h4 className="text-xl font-bold text-white">🥈 Segundo Lugar</h4>
+          <ul className="list-disc space-y-2 pl-6 text-[17px] leading-8 marker:text-red-500">
+            <li>Medallas para todos los integrantes</li>
+            <li>2 botellas de Pisco Alto del Carmen 1,5L</li>
+            <li>24 cervezas Patagonia Hoppy Lager lata 470cc</li>
+            <li>Pack asado, que incluye:</li>
+            <li>2 kg Costillar de Cerdo</li>
+            <li>2 kg Lomo Vetado</li>
+            <li>2 kg Chorizo Parrillero</li>
+          </ul>
+        </div>
+
+        <div className="space-y-3">
+          <h4 className="text-xl font-bold text-white">🥉 Tercer Lugar</h4>
+          <ul className="list-disc space-y-2 pl-6 text-[17px] leading-8 marker:text-red-500">
+            <li>Medallas para todos los integrantes</li>
+            <li>2 botellas de Pisco Alto del Carmen 1,5L</li>
+            <li>24 cervezas Patagonia Hoppy Lager lata 470cc</li>
+          </ul>
+        </div>
+
+        <p className="text-[17px] leading-8">
+          Las cervezas podrán ser reemplazadas por otra marca de categoría similar, previa
+          coordinación con la organización.
+        </p>
+      </div>
+    ),
   },
   {
     question: "¿Cuándo comienza la liga?",
@@ -64,22 +131,23 @@ function FAQAccordionItem({
   answer,
   link,
   linkLabel,
+  customContent,
 }: {
   question: string;
-  answer: string;
+  answer?: string;
   link?: string;
   linkLabel?: string;
+  customContent?: React.ReactNode;
 }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-neutral-700 bg-neutral-900 shadow-md transition hover:shadow-lg hover:border-red-500">
+    <div className="overflow-hidden rounded-2xl border border-neutral-700 bg-neutral-900 shadow-md transition hover:border-red-500 hover:shadow-lg">
       <button
-  type="button"
-  onClick={() => setOpen(!open)}
-  className="flex w-full items-center justify-between px-6 py-5 text-left bg-transparent hover:bg-neutral-800 transition"
->
-        
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="flex w-full items-center justify-between bg-transparent px-6 py-5 text-left transition hover:bg-neutral-800"
+      >
         <span className="text-lg font-semibold text-white">{question}</span>
         <span className="ml-4 text-2xl font-bold text-red-500">
           {open ? "−" : "+"}
@@ -87,15 +155,19 @@ function FAQAccordionItem({
       </button>
 
       {open && (
-  <div className="px-6 pb-5 pt-1 bg-neutral-900 text-gray-300">
-          <p className="leading-7">{answer}</p>
+        <div className="bg-neutral-900 px-6 pb-6 pt-1">
+          {customContent ? (
+            customContent
+          ) : (
+            <p className="text-[17px] leading-8 text-gray-300">{answer}</p>
+          )}
 
           {link && (
             <a
               href={link}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-5 inline-block rounded-lg bg-red-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-red-700 hover:scale-105"
+              className="mt-5 inline-block rounded-lg bg-red-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:scale-105 hover:bg-red-700"
             >
               {linkLabel || "Ver más"}
             </a>
@@ -112,23 +184,31 @@ export default function PreguntasFrecuentes() {
       <Header />
 
       <main className="min-h-screen bg-black py-16">
-        <section className="container mx-auto max-w-5xl px-4">
-          <div className="rounded-3xl bg-gradient-to-br from-black to-neutral-900 p-10 md:p-14 border border-red-600 shadow-[0_0_20px_rgba(255,0,0,0.4)]">
-            <h1 className="mb-10 text-3xl md:text-4xl font-bold uppercase tracking-widest text-white border-b border-red-600 pb-4">
+        <section className="container mx-auto px-4">
+          <div className="mx-auto mb-12 max-w-4xl text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-red-500">
+              Zona 7
+            </p>
+            <h1 className="mt-4 text-4xl font-extrabold text-white md:text-5xl">
               Preguntas Frecuentes
             </h1>
+            <p className="mt-4 text-lg leading-8 text-gray-400">
+              Resuelve tus dudas sobre inscripción, formato del torneo, horarios,
+              premios y funcionamiento general de la liga.
+            </p>
+          </div>
 
-            <div className="space-y-4">
-              {faqData.map((item, index) => (
-                <FAQAccordionItem
-                  key={index}
-                  question={item.question}
-                  answer={item.answer}
-                  link={item.link}
-                  linkLabel={item.linkLabel}
-                />
-              ))}
-            </div>
+          <div className="mx-auto grid max-w-4xl gap-6">
+            {faqData.map((item) => (
+              <FAQAccordionItem
+                key={item.question}
+                question={item.question}
+                answer={item.answer}
+                link={item.link}
+                linkLabel={item.linkLabel}
+                customContent={item.customContent}
+              />
+            ))}
           </div>
         </section>
       </main>
