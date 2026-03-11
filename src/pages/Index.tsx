@@ -6,7 +6,7 @@ import StatsSection from "@/components/StatsSection";
 import TribunalSection from "@/components/TribunalSection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
-
+import PhotoCarousel from "@/components/PhotoCarousel";
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
