@@ -24,6 +24,7 @@ const AdminResultados = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+
       <main className="py-16">
         {authorized ? (
           <AdminResultsSection />
@@ -62,6 +63,7 @@ const AdminResultados = () => {
           </section>
         )}
       </main>
+
       <Footer />
     </div>
   );

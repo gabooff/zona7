@@ -12,6 +12,11 @@ type ResultMatch = {
   away_score: number;
 };
 
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("es-CL");
+};
+
 const LatestResultsSection = () => {
   const [results, setResults] = useState<ResultMatch[]>([]);
 
@@ -52,40 +57,55 @@ const LatestResultsSection = () => {
   }, []);
 
   return (
-    <section id="ultimos-resultados" className="py-16">
+    <section id="ultimos-resultados" className="py-10">
       <div className="container mx-auto px-4">
-        <h2 className="zona-section-title mb-12 text-center text-3xl md:text-5xl">
+        <h2 className="zona-section-title mb-8 text-center text-3xl md:text-5xl">
           ÚLTIMOS RESULTADOS
         </h2>
 
-        <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mx-auto flex max-w-6xl flex-wrap justify-center gap-6">
           {results.length === 0 ? (
-            <div className="zona-card col-span-full text-center text-white">
+            <div className="zona-card w-full text-center text-white">
               Aún no hay resultados registrados.
             </div>
           ) : (
             results.map((match) => (
-              <div key={match.id} className="zona-card-highlight py-8 text-center">
-                <p className="mb-2 text-sm text-muted-foreground">
-                  Fecha {match.round} · {match.match_date} · {match.match_time}
+              <div
+                key={match.id}
+                className="zona-card-highlight w-full max-w-xl py-10 text-center"
+              >
+                <p className="mb-3 text-sm text-muted-foreground">
+                  Fecha {match.round} · {match.match_time}
                 </p>
 
-                <div className="mb-3 flex items-center justify-center gap-4">
-                  <span className="font-semibold text-foreground">
+                <div className="mb-4 flex items-center justify-center gap-5">
+                  <span
+                    className={`text-lg font-semibold ${
+                      match.home_score > match.away_score
+                        ? "text-primary"
+                        : "text-foreground"
+                    }`}
+                  >
                     {match.home_team}
                   </span>
 
-                  <span className="text-2xl font-bold text-primary">
+                  <span className="min-w-[110px] text-center text-4xl font-bold tracking-widest text-primary">
                     {match.home_score} : {match.away_score}
                   </span>
 
-                  <span className="font-semibold text-foreground">
+                  <span
+                    className={`text-lg font-semibold ${
+                      match.away_score > match.home_score
+                        ? "text-primary"
+                        : "text-foreground"
+                    }`}
+                  >
                     {match.away_team}
                   </span>
                 </div>
 
-                <p className="text-xs text-muted-foreground">
-                  Estadio San Jorge
+                <p className="text-sm text-muted-foreground">
+                  {formatDate(match.match_date)} · Estadio San Jorge
                 </p>
               </div>
             ))
