@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import ReglasConducta from "@/pages/ReglasConducta";
 import PreguntasFrecuentes from "@/pages/PreguntasFrecuentes";
+import AdminResultados from "@/pages/AdminResultados";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/reglas-conducta" element={<ReglasConducta />} />
           <Route path="/preguntas-frecuentes" element={<PreguntasFrecuentes />} />
+          <Route path="/admin-resultados" element={<AdminResultados />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

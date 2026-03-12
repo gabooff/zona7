@@ -7,6 +7,8 @@ import TribunalSection from "@/components/TribunalSection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PhotoCarousel from "@/components/PhotoCarousel";
+import AdminResultsSection from "@/components/AdminResultsSection";
+import LatestResultsSection from "@/components/LatestResultsSection";
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
@@ -14,6 +16,7 @@ const Index = () => {
       <main>
         <HeroSection />
         <ScheduleSection />
+        <LatestResultsSection />
         <StandingsSection />
         <StatsSection />
         <TribunalSection />

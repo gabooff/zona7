@@ -1,76 +1,98 @@
-import { ChevronDown } from "lucide-react";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 
-const sanctions = [
-  {
-    player: "Juan Pérez",
-    team: "Unidos FC",
-    redCards: 1,
-    matchday: "Fecha 3",
-    suspension: "1 fecha",
-  },
-  {
-    player: "Roberto Castro",
-    team: "Estrella Roja",
-    redCards: 1,
-    matchday: "Fecha 4",
-    suspension: "2 fechas",
-  },
-];
+type Sanction = {
+  id: number;
+  player_name: string;
+  team_name: string;
+  reason: string;
+  matches_suspended: number;
+  created_at?: string;
+};
 
 const TribunalSection = () => {
+  const [sanctions, setSanctions] = useState<Sanction[]>([]);
+
+  const loadSanctions = async () => {
+    const { data, error } = await supabase
+      .from("sanctions")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Error cargando sanciones:", error);
+    } else {
+      setSanctions(data || []);
+    }
+  };
+
+  useEffect(() => {
+    loadSanctions();
+
+    const channel = supabase
+      .channel("sanctions-refresh")
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "sanctions",
+        },
+        async () => {
+          await loadSanctions();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
   return (
     <section id="tribunal" className="py-16">
       <div className="container mx-auto px-4">
-        <h2 className="zona-section-title text-center text-3xl md:text-5xl mb-12">
-          TRIBUNAL DE DISCIPLINA
+        <h2 className="zona-section-title mb-12 text-center text-3xl md:text-5xl">
+          TRIBUNAL
         </h2>
 
-        <div className="zona-card max-w-4xl mx-auto">
-          {/* Filter */}
-          <div className="mb-6 space-y-4">
-            <p className="zona-table-header">FILTRAR POR DÍA</p>
-            <button className="w-full flex items-center justify-between bg-muted border-2 border-primary rounded-lg px-4 py-3 text-foreground font-medium">
-              <span>TODOS LOS DÍAS</span>
-              <ChevronDown className="w-5 h-5 text-primary" />
-            </button>
-          </div>
+        <div className="zona-card mx-auto max-w-5xl">
+          {sanctions.length === 0 ? (
+            <p className="text-center text-muted-foreground">
+              No hay sanciones registradas.
+            </p>
+          ) : (
+            <div className="space-y-4">
+              {sanctions.map((item) => (
+                <div
+                  key={item.id}
+                  className="rounded-xl border border-border bg-muted/20 px-4 py-4"
+                >
+                  <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+                    <div>
+                      <p className="text-lg font-bold text-foreground">
+                        {item.player_name}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        {item.team_name}
+                      </p>
+                    </div>
 
-          {/* Table */}
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b-2 border-primary">
-                  <th className="zona-table-header text-left py-3 px-2">JUGADOR</th>
-                  <th className="zona-table-header text-left py-3 px-2">EQUIPO</th>
-                  <th className="zona-table-header text-center py-3 px-2">ROJAS</th>
-                  <th className="zona-table-header text-center py-3 px-2">FECHA EXPULSIÓN</th>
-                  <th className="zona-table-header text-center py-3 px-2">SANCIÓN</th>
-                </tr>
-              </thead>
-              <tbody>
-                {sanctions.map((sanction, index) => (
-                  <tr 
-                    key={index}
-                    className="border-b border-border hover:bg-muted/50 transition-colors"
-                  >
-                    <td className="py-4 px-2 font-semibold text-foreground">
-                      {sanction.player}
-                    </td>
-                    <td className="py-4 px-2 text-muted-foreground">{sanction.team}</td>
-                    <td className="py-4 px-2 text-center text-destructive font-bold">
-                      {sanction.redCards}
-                    </td>
-                    <td className="py-4 px-2 text-center text-muted-foreground">
-                      {sanction.matchday}
-                    </td>
-                    <td className="py-4 px-2 text-center text-foreground">
-                      {sanction.suspension}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                    <div className="text-right">
+                      <p className="font-semibold text-primary">
+                        {item.matches_suspended} fecha
+                        {item.matches_suspended > 1 ? "s" : ""} de suspensión
+                      </p>
+                    </div>
+                  </div>
+
+                  <p className="mt-3 text-sm text-muted-foreground">
+                    Motivo: {item.reason}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>
