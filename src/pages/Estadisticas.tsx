@@ -1,21 +1,14 @@
 import Header from "@/components/Header";
-import HeroSection from "@/components/HeroSection";
-import PhotoCarousel from "@/components/PhotoCarousel";
 import Footer from "@/components/Footer";
+import StatsSection from "@/components/StatsSection";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
-const Index = () => {
+const Estadisticas = () => {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <Header />
       <main className="flex-1">
-        <HeroSection />
-        <PhotoCarousel
-          images={[
-            "/imagen1.jpeg",
-            "/imagen2.jpeg",
-          ]}
-        />
+        <StatsSection />
       </main>
       <Footer />
       <WhatsAppButton />
@@ -23,4 +16,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Estadisticas;

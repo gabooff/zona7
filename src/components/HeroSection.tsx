@@ -1,5 +1,5 @@
 import logo from "@/assets/logo-zona7.png";
-import PhotoCarousel from "@/components/PhotoCarousel";
+
 
 const HeroSection = () => {
   return (
@@ -27,12 +27,8 @@ const HeroSection = () => {
 
         {/* Carrusel */}
         <div className="mt-12">
-          <PhotoCarousel
-            images={[
-              "/imagen1.jpeg",
-              "/imagen2.jpeg",
-            ]}
-          />
+          
+          
         </div>
 
       </div>
