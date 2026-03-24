@@ -9,37 +9,37 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
           
           {/* Columna 1 */}
-          <div className="flex flex-col items-center md:items-start gap-5">
-            <img src={logo} alt="Zona 7" className="h-16 w-auto" />
+{/* Columna 1 */}
+<div className="flex flex-col items-center justify-center text-center gap-5">
+  <img src={logo} alt="Zona 7" className="h-16 w-auto" />
 
-            <div className="flex gap-4">
-              <a
-                href="https://instagram.com/zona7.cl"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 rounded-xl bg-neutral-800 hover:bg-red-600 transition"
-              >
-                <Instagram className="w-5 h-5 text-white" />
-              </a>
+  <div className="flex justify-center gap-4">
+    <a
+      href="https://instagram.com/zona7"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="p-3 rounded-xl bg-neutral-800 hover:bg-red-600 transition"
+    >
+      <Instagram className="w-5 h-5 text-white" />
+    </a>
 
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 rounded-xl bg-neutral-800 hover:bg-red-600 transition"
-              >
-                <Facebook className="w-5 h-5 text-white" />
-              </a>
+    <a
+      href="https://facebook.com/zona7"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="p-3 rounded-xl bg-neutral-800 hover:bg-red-600 transition"
+    >
+      <Facebook className="w-5 h-5 text-white" />
+    </a>
 
-              <a
-                href="mailto:contacto@zona7.cl"
-                className="p-3 rounded-xl bg-neutral-800 hover:bg-red-600 transition"
-              >
-                <Mail className="w-5 h-5 text-white" />
-              </a>
-            </div>
-          </div>
-
+    <a
+      href="mailto:contacto.ligazona7@gmail.com"
+      className="p-3 rounded-xl bg-neutral-800 hover:bg-red-600 transition"
+    >
+      <Mail className="w-5 h-5 text-white" />
+    </a>
+  </div>
+</div>
           {/* Columna 2 */}
           <div className="text-center">
             <h3 className="text-red-500 font-bold uppercase tracking-wider mb-4">

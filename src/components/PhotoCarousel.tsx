@@ -63,7 +63,7 @@ export default function PhotoCarousel({
         ❯
       </button>
 
-      <div className="mt-5 flex justify-center gap-3">
+      <div className="mt-2 mb-6 flex justify-center gap-3">
         {images.map((_, index) => (
           <button
             key={index}
