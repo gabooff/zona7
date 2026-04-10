@@ -21,6 +21,5 @@ Plataforma web para la gestión de una liga de fútbol 7.
 ## 🌐 Sitio web
 
 ## 📌 Autor
-
 Desarrollado por Gabriel Fernández
 
